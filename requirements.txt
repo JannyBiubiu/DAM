@@ -1,0 +1,10 @@
+Flask
+selenium
+bs4
+sys
+urllib
+json
+re
+requests
+PIL
+os

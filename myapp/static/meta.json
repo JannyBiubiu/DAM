@@ -1,0 +1,12 @@
+{
+	"media_src":[
+		"chinese",
+		"japanese",
+		"russian",
+		"minions",
+		"ringtone"],
+	"web_img":"image",
+	"scripts":"scripts",
+	"content":"content",
+	"fonts":"fonts"
+}

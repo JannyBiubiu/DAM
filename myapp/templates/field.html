@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid" style="margin-top:0;background-color:darkorange;background-repeat:repeat-x;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <br />
+                <h1 style="text-align:left">{{name}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        {% for song in list %}
+        <div class="col-xs-6 col-md-3" style="border:groove;text-align:center;height: 500px">
+            <br />
+            <div class="container" >
+            <div class="container" style="height:250px">
+                <img src='{{song["img"]}}' style="width:100%" /><br>
+            </div>
+            <div class="container" style="padding-bottom:2px">
+                <a href='{{url_for("play",name=name,id=song["id"])}}'>{{song["title"]}}</a>
+                <p class="s-fc7" >艺术家：{{song["artist"]}}</p>
+                <p class="s-fc7">专辑：{{song["album"]}}</p>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container" >
+    <div class="row">
+        <div class="col-md-6" style="border:groove;text-align:center;">
+            <br />
+            <div class="container">
+                <img src='{{"../"+data["img"]}}' style="width:100%" />
+                <p>{{data["title"]}}</p>
+                <p>艺术家：{{data["artist"]}}</p>
+                <p>专辑：{{data["album"]}}</p>
+            </div>
+        </div>
+        <div class="col-md-6" style="text-align:center">
+            {% for key in lyrics_key %}
+            <p>{{lyrics[key]}}</p>
+            {% endfor %}
+        </div>
+    </div>
+        <div class="container" style="position: fixed;left: 0;bottom: 0;width: 100%;height: 49px;line-height: 49px;z-index: 1010;align-content: center">
+            <audio controls="controls" style="color:orange; width:100%;">
+                    <source src='{{"../"+data["media"]}}' />
+                </audio>
+        </div>
+</div>
+
+{% endblock %}

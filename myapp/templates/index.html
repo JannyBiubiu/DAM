@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid" style="background-image:url(../static/image/music.png);background-color:darkorange;background-repeat:repeat-x;">
+    
+    <div class="container">
+        <br />
+        <h1>U l t r a    R e l e a s e</h1>
+        <p class="lead">Ultra Release is a special website for sharing unique music tastes.</p>
+        <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large" style="color:black;background-color:white;border:groove;border-color:black">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div class="container">
+    <div class="row" >
+    	<div class="col-md-12" style="text-align: center">
+    		<h2>分区概览</h2>
+    	</div>
+    	{% for field in fields %}
+            <div class="col-md-3" style="text-align: center;border-color: orange"><h3>{{field}}</h3>
+            	<a href="{{url_for('field',name=field)}}">了解更多 &raquo;</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
