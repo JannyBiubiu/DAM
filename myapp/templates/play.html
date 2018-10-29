@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col-md-6" style="border:groove;text-align:center;">
             <br />
-            <div class="container">
+            <div class="container" style="height: 650px;overflow-y: auto;overflow-x: hidden">
                 <img src='{{"../"+data["img"]}}' style="width:100%" />
                 <p>{{data["title"]}}</p>
                 <p>艺术家：{{data["artist"]}}</p>
                 <p>专辑：{{data["album"]}}</p>
             </div>
         </div>
-        <div class="col-md-6" style="text-align:center">
+        <div class="col-md-6" style="text-align:center;height:650px;overflow-x:hidden;overflow-y: auto;border:groove;text-align:center;">
             {% for key in lyrics_key %}
             <p>{{lyrics[key]}}</p>
             {% endfor %}

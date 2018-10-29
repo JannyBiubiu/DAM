@@ -14,16 +14,17 @@
 <div class="container">
     <div class="row">
         {% for song in list %}
-        <div class="col-xs-6 col-md-3" style="border:groove;text-align:center;height: 500px">
+        <div class="col-xs-6 col-md-3" style="border:groove;text-align:center;height: 500px;overflow-y: auto;overflow-x: hidden"">
             <br />
             <div class="container" >
             <div class="container" style="height:250px">
                 <img src='{{song["img"]}}' style="width:100%" /><br>
             </div>
             <div class="container" style="padding-bottom:2px">
-                <a href='{{url_for("play",name=name,id=song["id"])}}'>{{song["title"]}}</a>
+                <h3 >{{song["title"]}}</h3>
                 <p class="s-fc7" >艺术家：{{song["artist"]}}</p>
                 <p class="s-fc7">专辑：{{song["album"]}}</p>
+                <a href='{{url_for("play",name=name,id=song["id"])}}'>Play! &raquo;</a>
             </div>
             </div>
         </div>
