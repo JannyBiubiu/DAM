@@ -1,6 +1,11 @@
 # MusicWebsite
 Learn to build a website
 
+# 【非作业相关】练习svg
+- embed.html
+- example.svg
+- icon.svg
+
 # Hw02
 - 音乐资源展示
 
