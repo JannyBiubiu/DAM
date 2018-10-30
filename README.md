@@ -1,15 +1,15 @@
 # MusicWebsite
 Learn to build a website
 
-# 【非作业相关】练习svg
+## 【非作业相关】练习svg
 - embed.html
 - example.svg
 - icon.svg
 
-# Hw02
+## Hw02
 - 音乐资源展示
 
-# Hw02a
+## Hw02a
 1. 增加spyder.py,可以爬取网易云指定歌单的歌曲。
 2. 添加资源索引和分区索引，动态生成网页，使分区数可修改
 3. 将播放和展示分离开，避免同时播放多首歌曲的问题产生
