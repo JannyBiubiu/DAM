@@ -3,8 +3,10 @@
 {% block content %}
 <div class="container" >
     <div class="row">
+        <div class="col-md-12">
+            <br>
+        </div>
         <div class="col-md-6" style="border:groove;text-align:center;">
-            <br />
             <div class="container" style="height: 650px;overflow-y: auto;overflow-x: hidden">
                 <img src='{{"../"+data["img"]}}' style="width:100%" />
                 <p>{{data["title"]}}</p>
@@ -13,13 +15,16 @@
             </div>
         </div>
         <div class="col-md-6" style="text-align:center;height:650px;overflow-x:hidden;overflow-y: auto;border:groove;text-align:center;">
-            {% for key in lyrics_key %}
-            <p>{{lyrics[key]}}</p>
-            {% endfor %}
+            <div class="container" style="height:650px">
+                {% for key in lyrics_key %}
+                <p>{{lyrics[key]}}</p>
+                {% endfor %}
+                <p>--Ultra Realese--</p>
+            </div>
         </div>
     </div>
-        <div class="container" style="position: fixed;left: 0;bottom: 0;width: 100%;height: 49px;line-height: 49px;z-index: 1010;align-content: center">
-            <audio controls="controls" style="color:orange; width:100%;">
+        <div class="container" style="position: fixed;left: 0;bottom: 0;width: 100%;height: 49px;line-height: 49px;z-index: 1010;text-align: center">
+            <audio controls="controls" style="color:orange; width:100%;" autoplay="autoplay">
                     <source src='{{"../"+data["media"]}}' />
                 </audio>
         </div>

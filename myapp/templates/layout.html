@@ -27,6 +27,7 @@
                     {% for field in fields %}
                             <li><a href="{{url_for('field',name=field)}}">{{field}}</a></li>
                     {% endfor %}
+                    <li><a href="{{ url_for('about') }}">about</a></li>
                 </ul>
             </div>
         </div>
