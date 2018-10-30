@@ -28,6 +28,14 @@ def home():
 	fields=fields,
 	year =datetime.now().year,
 	)
+@app.route("/about")
+def about():
+	return render_template(
+		'about.html',
+		title='关于我',
+		year=datetime.now().year,
+		fields=fields
+	)
 @app.route("/#/<name>",methods=['post','get'])
 def field(name):
 	list=getmeta("./myapp/static/"+name+"/meta.json")
