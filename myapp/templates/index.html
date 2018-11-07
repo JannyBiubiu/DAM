@@ -1,0 +1,195 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class="container">
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active"><a href="#step1" role="tab" data-toggle="tab">Step1</a></li>
+			<li role="presentation"><a href="#step2" role="tab" data-toggle="tab">Step2</a></li>
+			<li role="presentation"><a href="#step3" role="tab" data-toggle="tab">Step3</a></li>
+		</ul>
+		<div class="tab-content">    
+			<div role="tabpanel" class="tab-pane active" id="step1">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-3">
+						<h4>step1:</h4>
+						<hr>
+						<p>上传一张图片作为水印</p>
+						<div style=" height:0px; overflow:hidden; position:absolute;">
+							<input type="file" id="picture"  />
+							
+						</div>
+						<button onclick="document.getElementById('picture').click();" class="btn btn-info">上传</button>
+						<hr>
+						<p>为了能够嵌入水印，将对图片预处理</p>
+						<p>最终水印将会失真</p>
+						<button id="upload_mark" onclick="" class="btn btn-info">最终效果预览</button>
+						<hr>
+					</div>
+					<script type="text/javascript">
+    					document.getElementById("upload_mark").addEventListener('click', function(){
+    						dataArr = {};
+    						
+            				var reader = new FileReader();
+	            			
+	            			reader.readAsDataURL(document.getElementById('picture').files[0]);
+	            			var fileName = document.getElementById('picture').files[0].name;
+	            			reader.onload = function(e){
+		            			var imgMsg = {
+		            			name : fileName,//获取文件名
+		            			base64 : this.result   //reader.readAsDataURL方法执行完后，base64数据储存在reader.result里
+		            			};
+
+		    	        		dataArr['data']=imgMsg;
+            					$.ajax({
+            						type : "post",
+            						cache:false,
+            						contentType: 'application/json; charset=UTF-8',
+            						url: 'http://localhost:5555/upload_mark',
+                					data: JSON.stringify(dataArr),
+                					dataType:'json',
+            					}).success(function (data) {
+                					document.getElementById('preview').src =data.data;
+            					}).error(function () {
+                				alert("上传失败");
+            					});
+            					
+            				};
+            			});
+
+   					</script>
+					<div class="col-md-2"></div>
+					<div class="col-md-3" style="border-style: groove;">
+						<div style="overflow-x:auto">
+							<img src="/static/default-mark.jpg" id="preview" style="width: 100%;height:100% ">
+						</div>
+					</div>
+					<script language="javascript">
+						document.getElementById("picture").addEventListener('change', function(){
+	  						var files = this.files;
+	  						var file;
+	  						if (files && files.length) {
+	  	  						file = files[0];
+	  	  						if (/^image\/png$|jpeg$/.test(file.type)) {
+	  	    						document.getElementById('preview').src = URL.createObjectURL(file);
+	  	  						} else {
+	  	    						alert("Please choose an image file with jpg jpeg png.");
+	  	  						}
+	  						} else {
+	  	  						alert("Please choose image file");
+	  						}
+	  					}, false);
+					</script>
+					<div class="col-md-2"></div>
+				</div>  
+			</div>
+		  	<div role="tabpanel" class="tab-pane" id="step2">
+		  		<div class="row">
+		  			<div class="col-md-2"></div>
+		  			<div class="col-md-8">
+		  				<h4>step2:</h4>
+						<hr>
+						<p>上传要加水印的图片</p>
+						
+						<div style=" height:0px; overflow:hidden; position:absolute;">
+							<input type="file" id="picture2"  />
+						</div>
+						<button onclick="document.getElementById('picture2').click();" class="btn btn-info">上传</button>
+							<span class="glyphicon glyphicon-ok " style="display:none" id="status" style="color:#ff9955"></span>
+						<hr>
+		  			</div>
+		  			<div class="col-md-2"></div>
+		  		</div>
+		  		<div class="row" style="">
+		  			<div class="col-md-4" style="border-style: groove;">
+		  				
+						<div style="overflow-x:auto">
+							<img src="/static/default-mark.jpg" id="preview2" style="width: 100%;height:100% ">
+						</div>
+		  			</div>
+		  			<script language="javascript">
+						document.getElementById("picture2").addEventListener('change', function(){
+	  						var files = this.files;
+	  						var file;
+	  						dataArr = {};
+	  						if (files && files.length) {
+	  	  						file = files[0];
+	  	  						var reader = new FileReader();
+	  	  						reader.readAsDataURL(file);
+	  	  						var fileName =file.name;
+	  	  						if (/^image\/png$|jpeg$/.test(file.type)) {
+	  	    						document.getElementById('preview2').src = URL.createObjectURL(file);
+	  	    						reader.onload = function(e){
+		            					var imgMsg = {
+		            						name : fileName,//获取文件名
+		            						base64 : this.result   //reader.readAsDataURL方法执行完后，base64数据储存在reader.result里
+		            					};
+
+		    	        				dataArr['data']=imgMsg;
+            							$.ajax({
+            								type : "post",
+            								cache:false,
+            								contentType: 'application/json; charset=UTF-8',
+            								url: 'http://localhost:5555/upload_img',
+                							data: JSON.stringify(dataArr),
+                							dataType:'json',
+            							}).success(function (data) {
+                							document.getElementById('status').style.display='inline';
+                							document.getElementById('preview2').src =data.data;
+            						}).error(function () {
+                				alert("上传失败");
+            					});
+            					
+            				}
+	  	  						} else {
+	  	    						alert("Please choose an image file with jpg jpeg png.");
+	  	  						}
+	  						} else {
+	  	  						alert("Please choose image file");
+	  						}
+	  					}, false);
+					</script>
+		  		</div>
+		  	</div>  
+		  	<div role="tabpanel" class="tab-pane" id="step3">
+		  		<div class="row">
+		  			<div class="col-md-2"></div>
+		  			<div class="col-md-8">
+		  				<h4>step3:</h4>
+						<p>点击生成，另存图片下载</p>
+						<button id="generate" class="btn btn-info">生成</button>
+						<hr>
+		  			</div>
+		  			<script type="text/javascript">
+		  				document.getElementById("generate").addEventListener('click',function(){
+		  					dataArr={};
+		  					var myDate=new Date();
+		  					var mytime=myDate.toLocaleTimeString();
+		  					dataArr['time']=mytime;
+		  					$.ajax({
+            					type : "post",
+            					cache:false,
+            					contentType: 'application/json; charset=UTF-8',
+            					url: 'http://localhost:5555/generate_img',
+                				data: JSON.stringify(dataArr),
+                				dataType:'json',
+            				}).success(function (data) {
+                				document.getElementById('result').src =data.data;
+            				}).error(function () {
+                			alert("请求失败");
+            				});
+		  				})
+		  			</script>
+		  			<div class="col-md-2"></div>
+		  		</div>
+		  		<div class="row">
+		  			<div class="col-md-4" style="border-style: groove;">
+		  				<div style="overflow-x:auto">
+							<img src="/static/result.jpg" id="result" style="width: 100%;height:100% ">
+						</div>
+		  			</div>
+		  		</div>
+		  	</div>  
+		</div> 
+	</div>
+{% endblock %}
