@@ -1,0 +1,8 @@
+flask
+cv2
+base64
+datetime
+os
+json
+numpy
+PIL
