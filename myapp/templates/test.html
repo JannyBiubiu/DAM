@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div style=" height:0px; overflow:hidden; position:absolute;">
+					<input type="file" id="upload"  />
+				</div>
+				<button onclick="document.getElementById('upload').click();" class="btn btn-info">上传</button>
+			</div>
+			<div class="col-md-3"></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-4" >
+				<img src="/static/default-mark.jpg" id='input' style="width: 100%">
+			</div>
+			<div class="col-md-4" >
+				<img src="/static/default-mark.jpg" id='result' style="width: 100%">
+			</div>
+			<div class="col-md-2"></div>
+			<script type="text/javascript">
+				document.getElementById("upload").addEventListener('change', function(){
+	  						var files = this.files;
+	  						var file;
+	  						dataArr = {};
+	  						if (files && files.length) {
+	  	  						file = files[0];
+	  	  						var reader = new FileReader();
+	  	  						reader.readAsDataURL(file);
+	  	  						var fileName =file.name;
+	  	  						if (/^image\/png$|jpeg$/.test(file.type)) {
+	  	    						document.getElementById('input').src = URL.createObjectURL(file);
+	  	    						reader.onload = function(e){
+		            					var imgMsg = {
+		            						name : fileName,//获取文件名
+		            						base64 : this.result   //reader.readAsDataURL方法执行完后，base64数据储存在reader.result里
+		            					};
+
+		    	        				dataArr['data']=imgMsg;
+            							$.ajax({
+            								type : "post",
+            								cache:false,
+            								contentType: 'application/json; charset=UTF-8',
+            								url: 'http://localhost:5555/extract_img',
+                							data: JSON.stringify(dataArr),
+                							dataType:'json',
+            							}).success(function (data) {
+                							document.getElementById('result').src =data.data;
+            						}).error(function () {
+                				alert("上传失败");
+            					});
+            					
+            				}
+	  	  						} else {
+	  	    						alert("Please choose an image file with jpg jpeg png.");
+	  	  						}
+	  						} else {
+	  	  						alert("Please choose image file");
+	  						}
+	  					}, false);
+			</script>
+		</div>	
+	</div>
+{% endblock %}
