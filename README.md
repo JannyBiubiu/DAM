@@ -28,4 +28,18 @@ Learn to build a website
 > 说明：
 - CMD:`python runserver.py`
 
+## HW04 Image Similarity Computing
+1. Given 10 images, compute similarities between the first one and the others, and find the most similar image to the first one.
+2. find some feature vectors on different scales.
+3. How to compute similarity? 
+	- 余弦相似度
+	- 欧式距离
+	- 其他距离……
+4. 其他方法
+	- 色彩空间
+	- 纹理信息，滤波
+	- ……
+5. 多张图像
+6. 其他文件格式
+
 
